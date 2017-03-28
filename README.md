@@ -62,9 +62,9 @@ func main() {
     }
 }
 ``` 
-This above is the sample code to setup a server application, see the sample: ```gowork/app/sample.go```
-
-Notice: In application.Go(), it will parse a json file. the file **must be** like this: 
+This above is the sample code to setup a server application, see the sample: ```gowork/app/sample.go```  
+---
+In application.Go(), it will parse a json file. the file **must be** like this: 
 ```
 {
 	"Log": {
@@ -83,7 +83,6 @@ Notice: In application.Go(), it will parse a json file. the file **must be** lik
 	}
 }
 ```
----
 **Log.Level**: the logging level, it must be the one of **"error/warning/info/debug"**  
 **Log.Suffix**: is the suffix of log file  
 > ***"060102-15"*** means the name of logging file output is ending with **170328-20.log**.
