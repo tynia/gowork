@@ -1,0 +1,56 @@
+package application
+
+import (
+	"io"
+	"io/ioutil"
+	"bytes"
+	"encoding/json"
+	e "gowork/common/error"
+)
+
+type configure struct {
+	Log struct {
+		Level  string           // logging level (error/warning/info/debug)
+		Suffix string           // logging file name suffix	
+	}
+
+	Prog struct {
+		CPU        int          // cpu in use
+		Deamon     bool         // you know
+		HealthPort string       // health port for monitor
+	}
+
+	Server struct {
+		PortInfo string         // serve port
+	}
+}
+
+func parseJSON(path string, v interface{}) *e.WError {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return e.NewWError(e.ERR_CODE_IO, "Failed to read config file[path: %s]", path)
+	}
+	var lines [][]byte
+	buf := bytes.NewBuffer(data)
+	for {
+		line, err := buf.ReadBytes('\n')
+		line = bytes.Trim(line, " \t\r\n")
+		if len(line) > 0 && !bytes.HasPrefix(line, []byte("//")) {
+			lines = append(lines, line)
+		}
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return e.NewWError(e.ERR_CODE_IO, "Failed to read config file[path: %s] content", path)
+		}
+	}
+
+	data = bytes.Join(lines, []byte{})
+	err = json.Unmarshal(data, v)
+	if err != nil {
+		return e.NewWError(e.ERR_CODE_IO, "Failed to unmarshal file[path: %s] content to json", path)
+	}
+
+	return nil
+}
