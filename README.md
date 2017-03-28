@@ -1,6 +1,6 @@
 # [gowork](https://github.com/tynia/gowork.git)
 **GOWORK** is a tiny server framework implement using golang.  
-It is aim at developing server faster.  
+It is aimed at developing server faster.  
 It is also an exercise to improve myself.  
 
 # Author
