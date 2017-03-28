@@ -4,7 +4,7 @@ import (
 	e "gowork/common/error"
 )
 
-func toInt(v interface{}) (int, *e.WError) {
+func ToInt(v interface{}) (int, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -16,7 +16,7 @@ func toInt(v interface{}) (int, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toInt8(v interface{}) (int8, *e.WError) {
+func ToInt8(v interface{}) (int8, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -28,7 +28,7 @@ func toInt8(v interface{}) (int8, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toInt16(v interface{}) (int16, *e.WError) {
+func ToInt16(v interface{}) (int16, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -40,7 +40,7 @@ func toInt16(v interface{}) (int16, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toInt32(v interface{}) (int32, *e.WError) {
+func ToInt32(v interface{}) (int32, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -52,7 +52,7 @@ func toInt32(v interface{}) (int32, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toInt64(v interface{}) (int64, *e.WError) {
+func ToInt64(v interface{}) (int64, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -64,8 +64,8 @@ func toInt64(v interface{}) (int64, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toRune(v interface{}) (rune, *e.WError) {
-	i, err := toInt(v)
+func ToRune(v interface{}) (rune, *e.WError) {
+	i, err := ToInt(v)
 	if err != nil {
 		return rune(i), err
 	}
@@ -73,7 +73,7 @@ func toRune(v interface{}) (rune, *e.WError) {
 	return rune(i), nil
 }
 
-func toUint(v interface{}) (uint, *e.WError) {
+func ToUint(v interface{}) (uint, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -85,7 +85,7 @@ func toUint(v interface{}) (uint, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toUint8(v interface{}) (uint8, *e.WError) {
+func ToUint8(v interface{}) (uint8, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -97,8 +97,8 @@ func toUint8(v interface{}) (uint8, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toByte(v interface{}) (byte, *e.WError) {
-	ui8, err := toUint8(v)
+func ToByte(v interface{}) (byte, *e.WError) {
+	ui8, err := ToUint8(v)
 	if err != nil {
 		return byte(ui8), err
 	}
@@ -106,7 +106,7 @@ func toByte(v interface{}) (byte, *e.WError) {
 	return byte(ui8), nil
 }
 
-func toUint16(v interface{}) (uint16, *e.WError) {
+func ToUint16(v interface{}) (uint16, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -118,7 +118,7 @@ func toUint16(v interface{}) (uint16, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toUint32(v interface{}) (uint32, *e.WError) {
+func ToUint32(v interface{}) (uint32, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -130,7 +130,7 @@ func toUint32(v interface{}) (uint32, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toUint32(v interface{}) (uint64, *e.WError) {
+func ToUint32(v interface{}) (uint64, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -142,7 +142,7 @@ func toUint32(v interface{}) (uint64, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toFloat32(v interface{}) (float32, *e.WError) {
+func ToFloat32(v interface{}) (float32, *e.WError) {
 	var f32 float32
 	if v == nil {
 		return f32, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
@@ -156,7 +156,7 @@ func toFloat32(v interface{}) (float32, *e.WError) {
 	return f32, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toFloat64(v interface{}) (float64, *e.WError) {
+func ToFloat64(v interface{}) (float64, *e.WError) {
 	var f64 float64
 	if v == nil {
 		return f64, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
@@ -170,7 +170,7 @@ func toFloat64(v interface{}) (float64, *e.WError) {
 	return f64, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toBool(v interface{}) (bool, *e.WError) {
+func ToBool(v interface{}) (bool, *e.WError) {
 	if v == nil {
 		return false, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -182,7 +182,7 @@ func toBool(v interface{}) (bool, *e.WError) {
 	return false, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toString(v interface{}) (string, *e.WError) {
+func ToString(v interface{}) (string, *e.WError) {
 	if v == nil {
 		return "", e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -194,7 +194,7 @@ func toString(v interface{}) (string, *e.WError) {
 	return "", e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toComplex64(v interface{}) (complex64, *e.WError) {
+func ToComplex64(v interface{}) (complex64, *e.WError) {
 	var comp64 complex64
 	if v == nil {
 		return comp, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
@@ -208,7 +208,7 @@ func toComplex64(v interface{}) (complex64, *e.WError) {
 	return comp64, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func toComplex64(v interface{}) (complex128, *e.WError) {
+func ToComplex64(v interface{}) (complex128, *e.WError) {
 	var comp128 complex128
 	
 	if v == nil {
