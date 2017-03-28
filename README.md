@@ -1,5 +1,5 @@
 # [gowork](https://github.com/tynia/gowork.git)
-**GOWORK**, which is named as **"狗窝"** in Chinese, is a tiny server framework implement using golang.  
+***GOWORK***, which sounds like **"狗窝"** in Chinese, is a tiny **server** framework implement using golang.  
 It is aimed at developing server faster.  
 It is also an exercise to improve myself.  
 
