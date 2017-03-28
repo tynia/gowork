@@ -98,7 +98,7 @@ In application.Go(), it will parse a json file. the file **must be** like this:
 
 **Server.PortInfo** the port for service 
 
-Those are defined in config file: ```gowork/app/conf/config.json```, which is the base need of a server application.
+Those items mentioned above are the base need of a server application. And they are defined in config file: ```gowork/app/conf/config.json```.
 
 ---
 # Sample Building:
