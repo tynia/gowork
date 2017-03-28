@@ -9,7 +9,7 @@ It is also an exercise to improve myself.
 
 # LICENSE
 The **gowork** is released under the [**MIT LICENSE**](http://opensource.org/licenses/mit-license.php).  
-you can import it without any copyright about it.  
+you can import it without ANY concern on copyright.  
 
 # Besides
 I'd like you will leave my nickname(tynia) and [repository](https://github.com/tynia/gowork) in your project which you import the [**gowork**](https://github.com/tynia/gowork) in it.  
