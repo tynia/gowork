@@ -83,18 +83,18 @@ Notice: In application.Go(), it will parse a json file. the file **must be** lik
 	}
 }
 ```
-
+---
 **Log.Level**: the logging level, it must be the one of **"error/warning/info/debug"**  
-**Log.Suffix**: is the suffix of log file,
+**Log.Suffix**: is the suffix of log file  
 > ***"060102-15"*** means the name of logging file output is ending with **170328-20.log**.
 **17** is short of year **2017**;
 **03** is the month **March**;
 **28** is the day of month;
 **20** is the hour of the day. 
 
-**Prog.CPU**: a limit of CPU usage. 0 is default, means to use all cores 
-**Prog.Daemon**: you know
-**Prog.HealthPort**: the port for monitior, if you need 
+**Prog.CPU**: a limit of CPU usage. 0 is default, means to use all cores  
+**Prog.Daemon**: you know  
+**Prog.HealthPort**: the port for monitior, if you need  
 
 **Server.PortInfo** the port for service 
 
