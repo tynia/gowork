@@ -1,5 +1,5 @@
 # [gowork](https://github.com/tynia/gowork.git)
-***GOWORK***, which sounds like **"狗窝"** in Chinese, is a tiny **server** framework implement using golang.  
+***GOWORK***, which sounds like **"狗窝"** in Chinese, is a tiny **server** framework implemented using golang.  
 It is aimed at developing server faster.  
 It is also an exercise to improve myself.  
 
@@ -9,21 +9,21 @@ It is also an exercise to improve myself.
 
 # LICENSE
 The **gowork** is released under the [**MIT LICENSE**](http://opensource.org/licenses/mit-license.php).  
-you can use it without any copyright about it.  
+you can import it without any copyright about it.  
 
 # Besides
-I'd like you will leave my name(tynia) and [repository](https://github.com/tynia/gowork) in your project, which you used the [**gowork**](https://github.com/tynia/gowork) in it.  
+I'd like you will leave my nickname(tynia) and [repository](https://github.com/tynia/gowork) in your project which you import the [**gowork**](https://github.com/tynia/gowork) in it.  
 
 ---
-The **gowork** framework contains several modules includeing:
+# Introduction
+The **gowork** framework contains several modules, including:
 - application 
 - [logging](https://github.com/xuyu/logging)   --[**@xuyu**](https://github.com/xuyu) 
 
-# Introduction
 **[application]** 
 
-It is a simple application .  
-When using the **gowork**, all you need do like this below:
+It is a simple framework for server application development.  
+Using the **gowork**, all you need do like this below:
 ```
 import (
     "gowork/common/application"
@@ -62,7 +62,7 @@ func main() {
     }
 }
 ``` 
-This above is the sample code to setup a server application, see the sample: ```gowork/app/sample.go```  
+This above is the sample code to setup a server application, see the file: ```gowork/app/sample.go```  
 
 ---
 In application.Go(), it will parse a json file. the file **must be** like this: 
@@ -102,7 +102,7 @@ This above is the base need of a server application. These are defined in config
 
 ---
 # Sample Building:
-The sample code located in app/sample.go is a simple example of http server.
+The sample code located in ```gowork/app/sample.go``` is an example of http server.
 
 ```
 cd gowork/app
