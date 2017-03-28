@@ -63,6 +63,7 @@ func main() {
 }
 ``` 
 This above is the sample code to setup a server application, see the sample: ```gowork/app/sample.go```  
+
 ---
 In application.Go(), it will parse a json file. the file **must be** like this: 
 ```
