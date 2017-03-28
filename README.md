@@ -8,16 +8,16 @@ It is also an exercise to improve myself.
 **email** : [ekesi@live.com](ekesi@live.com)
 
 # LICENSE
-The **gowork** library is released under the [**MIT LICENSE**](http://opensource.org/licenses/mit-license.php).  
+The **gowork** is released under the [**MIT LICENSE**](http://opensource.org/licenses/mit-license.php).  
 you can use it without any copyright about it.  
 
 # Besides
-I'd like you will leave my name(tynia) and [repository](https://github.com/tynia/gowork) in your project, which you use the [**gowork**](https://github.com/tynia/gowork) in it.  
+I'd like you will leave my name(tynia) and [repository](https://github.com/tynia/gowork) in your project, which you used the [**gowork**](https://github.com/tynia/gowork) in it.  
 
 ---
 The **gowork** framework contains several modules includeing:
 - application 
-- [logger](https://github.com/xuyu/logging)   --[**@xuyu**](https://github.com/xuyu) 
+- [logging](https://github.com/xuyu/logging)   --[**@xuyu**](https://github.com/xuyu) 
 
 # Introduction
 **[application]** 
