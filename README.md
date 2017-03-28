@@ -1,5 +1,5 @@
 # [gowork](https://github.com/tynia/gowork.git)
-**GOWORK** is a tiny server framework implement using golang.  
+**GOWORK**, which is named as **"狗窝"** in Chinese, is a tiny server framework implement using golang.  
 It is aimed at developing server faster.  
 It is also an exercise to improve myself.  
 
@@ -23,7 +23,7 @@ The **gowork** framework contains several modules includeing:
 **[application]** 
 
 It is a simple application .  
-When using the logger, all you need do like this below:
+When using the **gowork**, all you need do like this below:
 ```
 import (
     "gowork/common/application"
