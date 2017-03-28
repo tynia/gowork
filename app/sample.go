@@ -23,14 +23,12 @@ func main () {
 
 	// now we can get the value of key "say"
     v := app.Get("say")
-    str, _ := convertor.ToString(v) // you can get value of "say" is "hello, gowork !"
-	fmt.Println(str)
+    str, _ := convertor.ToString(v)
 
 	// set another key/value into the instance of application
 	app.Set("another", 100)
 	v = app.Get("another")
-    vInt, _ := convertor.ToInt(v) // you can get value of "another" is 100
-	fmt.Println(vInt)
+    vInt, _ := convertor.ToInt(v)
 
 	// add handler to serve as http server
 	app.AddHandlerFunc("/hello", HandlerHello)
