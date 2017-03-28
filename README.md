@@ -12,7 +12,7 @@ The **gowork** is released under the [**MIT LICENSE**](http://opensource.org/lic
 you can import it without ANY concern on copyright.  
 
 # Besides
-I'd like you will retain my nickname(tynia) and [repository](https://github.com/tynia/gowork) in your project which you import the [**gowork**](https://github.com/tynia/gowork) in it.  
+I hope you can retain my nickname(tynia) and [repository](https://github.com/tynia/gowork) in your project which you import the [**gowork**](https://github.com/tynia/gowork) in it.  
 
 ---
 # Introduction
