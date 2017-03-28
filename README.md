@@ -35,18 +35,34 @@ import (
 
 func main() {
     config := map[string]interface{}{}
+	// set an value into map
     value := "hello, gowork !"
-    config["key"] = value
+    config["say"] = value
+	// new application using the map, which contains an key "say" and value "hello, gowork !"
     app := application.NewApplication("sample", config)
-    v := app.Get("key")
-    str, _ := convertor.ToString(v) // you can get value of "key" is "hello, gowork !"
 
+	// now we can get the value of key "say"
+    v := app.Get("say")
+    str, _ := convertor.ToString(v) // you can get value of "say" is "hello, gowork !"
+	fmt.Println(str)
+
+	// set another key/value into the instance of application
+	app.Set("another", 100)
+	v = app.Get("another")
+    vInt, _ := convertor.ToInt(v) // you can get value of "another" is 100
+	fmt.Println(vInt)
+
+	// add handler to serve as http server
+	app.AddHandlerFunc("/hello", HandlerHello)
+
+	// application run
     err := app.Go()
     if err != nil {
 	    fmt.Println("Error: %s", err.Error())
     }
 }
-```
+``` 
+This above is the sample code to setup a server application, see the sample: ```gowork/app/sample.go```
 
 Notice: In application.Go(), it will parse a json file. the file **must be** like this: 
 ```
@@ -68,8 +84,6 @@ Notice: In application.Go(), it will parse a json file. the file **must be** lik
 }
 ```
 
-This is the base need of a server application. These are defined in config file: ```gowork/app/conf/config.json``` 
-
 **Log.Level**: the logging level, it must be the one of **"error/warning/info/debug"**
 **Log.Suffix**: is the suffix of log file, 
 > ***"060102-15"*** means the name of logging file output is ending with 170328-20. 17 is short of year 2017; 03 is the month; 28 is the day of month; 20 is the hour of the day. 
@@ -80,9 +94,8 @@ This is the base need of a server application. These are defined in config file:
 
 **Server.PortInfo** the port for service 
 
-More detail, please see ```gowork/app/sample.go```
+This above is the base need of a server application. These are defined in config file: ```gowork/app/conf/config.json```
 
- 
 ---
 # Sample Building:
 The sample code located in app/sample.go is a simple example of http server.

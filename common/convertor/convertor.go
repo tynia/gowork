@@ -33,7 +33,7 @@ func ToInt16(v interface{}) (int16, *e.WError) {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
 
-	if i16, ok := v.(int); ok {
+	if i16, ok := v.(int16); ok {
 		return i16, nil
 	}
 
@@ -130,7 +130,7 @@ func ToUint32(v interface{}) (uint32, *e.WError) {
 	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func ToUint32(v interface{}) (uint64, *e.WError) {
+func ToUint64(v interface{}) (uint64, *e.WError) {
 	if v == nil {
 		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
@@ -163,7 +163,7 @@ func ToFloat64(v interface{}) (float64, *e.WError) {
 	}
 
 	var ok bool
-	if f64, ok = v.(float32); ok {
+	if f64, ok = v.(float64); ok {
 		return f64, nil
 	}
 
@@ -197,18 +197,18 @@ func ToString(v interface{}) (string, *e.WError) {
 func ToComplex64(v interface{}) (complex64, *e.WError) {
 	var comp64 complex64
 	if v == nil {
-		return comp, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+		return comp64, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
 	}
 
 	var ok bool
-	if comp64, ok := v.(complex64); ok {
+	if comp64, ok = v.(complex64); ok {
 		return comp64, nil
 	}
 
 	return comp64, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
 }
 
-func ToComplex64(v interface{}) (complex128, *e.WError) {
+func ToComplex128(v interface{}) (complex128, *e.WError) {
 	var comp128 complex128
 	
 	if v == nil {
@@ -216,7 +216,7 @@ func ToComplex64(v interface{}) (complex128, *e.WError) {
 	}
 
 	var ok bool
-	if comp128, ok := v.(complex128); ok {
+	if comp128, ok = v.(complex128); ok {
 		return comp128, nil
 	}
 

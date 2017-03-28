@@ -145,8 +145,7 @@ func (app *Application) SetInitHandler(handler InitHandlerFunc) {
 }
 
 func (app *Application) Set(key string, value interface{}) {
-	v, ok := app.config[key]
-	if ok {
+	if v, ok := app.config[key]; ok {
 		logging.Warning("[Application.Set] Try to replace value[%#+v] to key = %s, original value: %s", value, key, v)
 		//return e.NewWError(e.ERR_CODE_PARA, "Failed to insert value[%#+v] into config, key = %s", value, key)
 	}
