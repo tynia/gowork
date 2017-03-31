@@ -104,7 +104,7 @@ Those items mentioned above are the base need of a server application. And they 
 
 ---
 # Usage:
-#### Sample Building:
+#### [Sample Building]:
 The sample code located in ```gowork/sample/sample.go``` is an example of http server.
 
 ```
@@ -120,26 +120,26 @@ It will product an executable file named ***```app```***, after you do ```go bui
 
 **NOTICE**: The ***```config.json-path```*** in command line should be specified, or the ***```app```*** built will run using the default path ***```conf/config.json```***
 
-#### Using **gowork** as a library
+#### [Using ***gowork*** as a library]
 * clone ***gowork*** in your ```$GOPATH/src```.
 > The ***RELATIVE PATH*** is not supported in Go language. When building projects, we should import the ***absolute path*** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the ```$GOPATH/src``` to make **gowork** is the top level directory under **GOPATH**
 
-***FOR EXAMPLE***
-|-**$GOPATH**
-  |-**gowork**
-    |- application
-    |- convertor
-    |- net
-    |-...
-  |-**PROJv1**
-    |- source file
-    |- source file
-    |- ...
+***FOR EXAMPLE***  
+|-**$GOPATH**  
+  |-**gowork**  
+    |- application  
+    |- convertor  
+    |- net  
+    |-...  
+  |-**PROJv1**  
+    |- source file  
+    |- source file  
+    |- ...  
 
 My GOPATH is set to ```/home/tynia/Go```.
-I clone [**gowork**](https://github.com/tynia/gowork) under the ***Directory*** ```/home/tynia/Go/src```.
+I clone [**gowork**](https://github.com/tynia/gowork) under the path ```/home/tynia/Go/src```.
 Then the **gowork** is located as ```/home/tynia/Go/src/gowork```.
-I create a directory named ***PROJv1*** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in ***PROJv1***
+I create a directory named ***PROJv1*** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in ***PROJv1***.
 
 ---------------------------
 ### Fork me at GITHUB
