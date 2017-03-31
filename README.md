@@ -117,7 +117,7 @@ It will product an executable file named **app**, after you type ```go build``` 
 ./app -c config.json-path
 ```
 
-**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the *app* built will run using the default path ***```conf/config.json```***
+**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the ***```app```*** built will run using the default path ***```conf/config.json```***
 
 ---------------------------
 ### Fork me at GITHUB
