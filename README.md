@@ -114,7 +114,7 @@ The sample code located in ```gowork/sample/sample.go``` is an example of http s
 It will product an executable file named **app**, after you type ```go build``` in console and enter.
 
 ```
-./app `-c config.json-path`
+./app -c config.json-path
 ```
 
 **NOTICE**: The ***```config.json-path```*** in command line should be specified, or the *app* built will run using the default path ***```conf/config.json```***
