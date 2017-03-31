@@ -18,7 +18,8 @@ I hope you can retain my nickname(tynia) and [repository](https://github.com/tyn
 # Introduction
 The **gowork** framework contains several modules, including:
 - application 
-- [logging](https://github.com/xuyu/logging)   --[**@xuyu**](https://github.com/xuyu) 
+- extern/[logging](https://github.com/xuyu/logging)   --[**@xuyu**](https://github.com/xuyu) 
+> The directory **extern** is the location used to place the third-party library, such as **logging**---- clone from [**@xuyu**](https://github.com/xuyu/logging.git).
 
 **[application]** 
 
@@ -26,8 +27,8 @@ It is a simple framework for server application development.
 When using the **gowork**, you need to do as follows(**REMEMBER TO ADD YOUR GOPATH AS THE PREFIX OF GOWORK**):
 ```
 import (
-    "gowork/common/application"
-    "gowork/common/application"
+    "gowork/application"
+    "gowork/convertor"
     ... // other imports you need
 )
 
@@ -62,7 +63,7 @@ func main() {
     }
 }
 ``` 
-Above is the sample code to setup a server application, see the file: ```gowork/sample.go```  
+Above is the sample code to setup a server application, see the file: ```gowork/sample/sample.go```  
 
 ---
 In application.Go(), it will parse a json file. the file **must be** like this: 
@@ -99,18 +100,25 @@ In application.Go(), it will parse a json file. the file **must be** like this:
 **Server.PortInfo** the port for service 
 
 Those items mentioned above are the base need of a server application. And they are defined in config file: ```gowork/conf/config.json```.
+> You should replace the configure items defined in config-template.json according your server application. 
 
 ---
 # Sample Building:
-The sample code located in ```gowork/sample.go``` is an example of http server.
+The sample code located in ```gowork/sample/sample.go``` is an example of http server.
 
 ```
-cd gowork
-go build
+# cd gowork
+# go build
 ```
 
-> Ps: It will product an executable file name **app**.
-   
+It will product an executable file named **app**, after you type ```go build``` in console and enter.
+
+```
+./app **-c config.json-path**
+```
+
+**NOTICE**: config.json-path should be specified, or the app will run using the default path ```conf/config.json```
+
 ---------------------------
 ### Fork me at GITHUB
 There are more features, and shall we add them one by one?

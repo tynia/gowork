@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"gowork/common/application"
-	"gowork/common/convertor"
+	"gowork/application"
+	"gowork/convertor"
 )
 
 func HandlerHello(w http.ResponseWriter, req *http.Request) {

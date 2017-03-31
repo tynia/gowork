@@ -1,0 +1,16 @@
+{
+	"Log": {
+		"Level": "debug",
+		"Suffix": "060102-15"
+	},
+	
+	"Prog": {
+		"CPU": 0,
+		"Daemon": false,
+		"HealthPort": "localhost:12320"
+	},
+	
+	"Server": {
+		"PortInfo": "0.0.0.0:12321"
+	}
+}

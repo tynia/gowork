@@ -1,7 +1,7 @@
 package convertor
 
 import (
-	e "gowork/common/error"
+	e "gowork/error"
 )
 
 func ToInt(v interface{}) (int, *e.WError) {

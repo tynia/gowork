@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"runtime"
 	"time"
-	"gowork/common/logging"
-	"gowork/common/net"
-	e "gowork/common/error"
+	"gowork/net"
+	e "gowork/error"
+	"gowork/extern/logging"
 )
 
 var (

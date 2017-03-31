@@ -1,8 +1,6 @@
 package net
 
 import (
-	e "gowork/common/error"
-	"gowork/common/logging"
 	"net/http"
 	"io/ioutil"
 	"io"
@@ -11,6 +9,8 @@ import (
 	"strings"
 	"time"
 	"fmt"
+	e "gowork/error"
+	"gowork/extern/logging"
 )
 
 var (

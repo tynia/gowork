@@ -7,10 +7,10 @@
 	"Prog": {
 		"CPU": 0,
 		"Daemon": false,
-		"HealthPort": "localhost:25169"
+		"HealthPort": "localhost:12320"
 	},
 	
 	"Server": {
-		"PortInfo": "0.0.0.0:13110"
+		"PortInfo": "0.0.0.0:12321"
 	}
 }

@@ -6,8 +6,8 @@ import (
 	"flag"
 	"runtime"
 	"path/filepath"
-	"gowork/common/logging"
-	e "gowork/common/error"
+	"gowork/extern/logging"
+	e "gowork/error"
 )
 
 func initConfigure(v interface{}) *e.WError {

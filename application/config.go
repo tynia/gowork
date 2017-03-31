@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"bytes"
 	"encoding/json"
-	e "gowork/common/error"
+	e "gowork/error"
 )
 
 type configure struct {
