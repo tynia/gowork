@@ -14,24 +14,7 @@ func initConfigure(v interface{}) *e.WError {
 	path := flag.String("c", "conf/config.json", "-c config-file-path")
 	flag.Parse()
 
-	info, err := os.Stat(*path)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return e.NewWError(e.ERR_CODE_PARA, "Invalid config file: %s", *path)
-		}
-		return e.NewWError(e.ERR_CODE_PARA, "Failed to stat config file[path: %s]", *path)
-	}
-	
-	mode := info.Mode()
-	if mode.IsDir() {
-		return e.NewWError(e.ERR_CODE_PARA, "Invalid config file[path: %s], it is a directory", *path)
-	}
-
-	if !mode.IsRegular() {
-		return e.NewWError(e.ERR_CODE_PARA, "Invalid config file[path: %s], it is not a regular file", *path)
-	}
-
-	return parseJSON(*path, v)
+	return ParseJSON(*path, v)
 }
 
 func initLogger(appName, level, suffix string, daemon bool) *e.WError {

@@ -2,6 +2,7 @@ package application
 
 import (
 	"io"
+	"os"
 	"io/ioutil"
 	"bytes"
 	"encoding/json"
@@ -25,7 +26,24 @@ type configure struct {
 	}
 }
 
-func parseJSON(path string, v interface{}) *e.WError {
+func ParseJSON(path string, v interface{}) *e.WError {
+	info, err := os.Stat(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return e.NewWError(e.ERR_CODE_PARA, "Invalid config file: %s", path)
+		}
+		return e.NewWError(e.ERR_CODE_PARA, "Failed to stat config file[path: %s]", path)
+	}
+	
+	mode := info.Mode()
+	if mode.IsDir() {
+		return e.NewWError(e.ERR_CODE_PARA, "Invalid config file[path: %s], it is a directory", path)
+	}
+
+	if !mode.IsRegular() {
+		return e.NewWError(e.ERR_CODE_PARA, "Invalid config file[path: %s], it is not a regular file", path)
+	}
+
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return e.NewWError(e.ERR_CODE_IO, "Failed to read config file[path: %s]", path)
