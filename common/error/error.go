@@ -18,15 +18,15 @@ func (err *WError) Code() int {
 }
 
 func (err *WError) Error() string {
-	//return fmt.Sprintf("Error: %s, %s", fetchErrString(err.eCode), err.eDetail)
-	return fmt.Sprintf("Code: %d, Error: %s, Detail: %s", err.eCode, fetchErrString(err.eCode), err.eDetail)
+	return fmt.Sprintf("Error: [%s] %s", fetchErrString(err.eCode), err.eDetail)
+	//return err.eDetail
 }
 
-func (err *WError) String() string {
+func (err *WError) Detail() string {
 	if err.eCode == ERR_CODE_OK {
 		return "ok"
 	} else {
-		return err.Error()
+		return fmt.Sprintf("Code: %d, Error: %s, Detail: %s", err.eCode, fetchErrString(err.eCode), err.eDetail)
 	}
 }
 

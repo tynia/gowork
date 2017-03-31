@@ -23,7 +23,7 @@ The **gowork** framework contains several modules, including:
 **[application]** 
 
 It is a simple framework for server application development.  
-When using the **gowork**, you need to do as follows:
+When using the **gowork**, you need to do as follows(**REMEMBER TO ADD YOUR GOPATH AS THE PREFIX OF GOWORK**):
 ```
 import (
     "gowork/common/application"
@@ -62,7 +62,7 @@ func main() {
     }
 }
 ``` 
-Above is the sample code to setup a server application, see the file: ```gowork/app/sample.go```  
+Above is the sample code to setup a server application, see the file: ```gowork/sample.go```  
 
 ---
 In application.Go(), it will parse a json file. the file **must be** like this: 
@@ -98,14 +98,14 @@ In application.Go(), it will parse a json file. the file **must be** like this:
 
 **Server.PortInfo** the port for service 
 
-Those items mentioned above are the base need of a server application. And they are defined in config file: ```gowork/app/conf/config.json```.
+Those items mentioned above are the base need of a server application. And they are defined in config file: ```gowork/conf/config.json```.
 
 ---
 # Sample Building:
-The sample code located in ```gowork/app/sample.go``` is an example of http server.
+The sample code located in ```gowork/sample.go``` is an example of http server.
 
 ```
-cd gowork/app
+cd gowork
 go build
 ```
 
