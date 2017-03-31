@@ -87,7 +87,7 @@ In application.Go(), it will parse a json file. the file **must be** like this:
 ```
 **Log.Level**: the logging level, it must be the one of **"error/warning/info/debug"**  
 **Log.Suffix**: is the suffix of log file  
-> **"060102-15"** means the name of logging file output is ending with **170328-20.log**.
+> **"060102-15"** means the name of logging file output is ending with **170328-20.log**.  
 **17** is short of year **2017**;  
 **03** is the month **March**;  
 **28** is the day of month;  
@@ -122,8 +122,7 @@ It will product an executable file named ***```sample```***, after you do ```go 
 
 #### [Using [**gowork**](https://github.com/tynia/gowork) as a library]
 * clone **gowork** in your ```$GOPATH/src```.
-> The **RELATIVE PATH** is not supported in Go language. When building projects, we should import the **ABSOLUTE PATH** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the **```$GOPATH/src```** to make **gowork** is the top level directory under **GOPATH**.
-
+> The **RELATIVE PATH** is not supported in Go language. When building projects, we should import the **ABSOLUTE PATH** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the **```$GOPATH/src```** to make **gowork** is the top level directory under **GOPATH**.  
 My GOPATH is set to ```/home/tynia/Go```.  
 I clone [**gowork**](https://github.com/tynia/gowork) under the path ```/home/tynia/Go/src```.  
 Then the **gowork** is located as ```/home/tynia/Go/src/gowork```.  
