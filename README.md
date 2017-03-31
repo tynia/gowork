@@ -1,5 +1,5 @@
 # [gowork](https://github.com/tynia/gowork.git)
-***GOWORK***, which sounds like **"狗窝"** in Chinese, is a tiny **server** framework implemented using golang.  
+**gowork**, which sounds like **"狗窝"** in Chinese, is a tiny **server** framework implemented using golang.  
 It is aimed at developing server faster.  
 It is also an exercise to improve myself.  
 
@@ -87,11 +87,11 @@ In application.Go(), it will parse a json file. the file **must be** like this:
 ```
 **Log.Level**: the logging level, it must be the one of **"error/warning/info/debug"**  
 **Log.Suffix**: is the suffix of log file  
-> ***"060102-15"*** means the name of logging file output is ending with **170328-20.log**.
-**17** is short of year **2017**;
-**03** is the month **March**;
-**28** is the day of month;
-**20** is the hour of the day. 
+> **"060102-15"** means the name of logging file output is ending with **170328-20.log**.
+**17** is short of year **2017**;  
+**03** is the month **March**;  
+**28** is the day of month;  
+**20** is the hour of the day.  
 
 **Prog.CPU**: a limit of CPU usage. 0 is default, means to use all cores  
 **Prog.Daemon**: you know  
@@ -118,10 +118,10 @@ It will product an executable file named ***```sample```***, after you do ```go 
 ./sample -c config.json-path
 ```
 
-**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the ***```sample```*** built will run using the default path ***```conf/config.json```***
+**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the **```sample```** built will run using the default path ***```conf/config.json```***
 
-#### [Using ***gowork*** as a library]
-* clone ***gowork*** in your ```$GOPATH/src```.
+#### [Using [**gowork**](https://github.com/tynia/gowork) as a library]
+* clone **gowork** in your ```$GOPATH/src```.
 > The **RELATIVE PATH** is not supported in Go language. When building projects, we should import the **ABSOLUTE PATH** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the **```$GOPATH/src```** to make **gowork** is the top level directory under **GOPATH**.
 
 My GOPATH is set to ```/home/tynia/Go```.  
