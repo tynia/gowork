@@ -40,6 +40,10 @@ func reviewDumpPanic(file *os.File) *e.WError {
 type InitHandlerFunc func() *e.WError
 type Handler net.Handler
 
+var (
+	App *Application
+)
+
 type Application struct {
 	appName    string
 	baseConfig *configure
@@ -51,16 +55,17 @@ type Application struct {
 }
 
 func NewApplication(name string, conf map[string]interface{}) *Application {
-	app := &Application {
+	App := &Application {
 		appName: name,
 		baseConfig: new(configure),
 		health: nil,
 		handler: nil,
+		initHandler: nil,
 		config: conf,
 		handlerMap: make(map[string]net.HandlerFunc),
 	}
 
-	return app
+	return App
 }
 
 func (app *Application) signal() {
