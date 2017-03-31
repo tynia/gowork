@@ -122,26 +122,27 @@ It will product an executable file named ***```app```***, after you do ```go bui
 
 #### [Using ***gowork*** as a library]
 * clone ***gowork*** in your ```$GOPATH/src```.
-> The **RELATIVE PATH** is not supported in Go language. When building projects, we should import the ***ABSOLUTE PATH*** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the **```$GOPATH/src```** to make **gowork** is the top level directory under **GOPATH**.
-
-**FOR EXAMPLE**  
-```
-|-**$GOPATH**  
-   |-**gowork**  
-       |- application  
-       |- convertor  
-       |- net  
-       |-...  
-   |- **PROJv1**  
-       |- source file  
-       |- source file  
-       |- ...
-```
+> The **RELATIVE PATH** is not supported in Go language. When building projects, we should import the **ABSOLUTE PATH** of library we import. In order to use **gowork** conveniently, we should clone the **gowork** under the **```$GOPATH/src```** to make **gowork** is the top level directory under **GOPATH**.
 
 My GOPATH is set to ```/home/tynia/Go```.  
 I clone [**gowork**](https://github.com/tynia/gowork) under the path ```/home/tynia/Go/src```.  
 Then the **gowork** is located as ```/home/tynia/Go/src/gowork```.  
-I create a directory named ***PROJv1*** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in ***PROJv1***.  
+I create a directory named ***PROJv1*** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in ***PROJv1***.
+**SOURCE TREE** is as follows:
+```
+|- $GOPATH  
+   |- gowork  
+       |- application  
+       |- convertor  
+       |- net  
+       |-...  
+   |- PROJ1  
+       |- source file  
+       |- source file  
+       |- ...
+   |- PROJ2  
+   |- PROJ3
+```
 ---------------------------
 ### Fork me at GITHUB
 There are more features, and shall we add them one by one?
