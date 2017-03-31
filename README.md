@@ -126,15 +126,15 @@ It will product an executable file named ***```app```***, after you do ```go bui
 
 ***FOR EXAMPLE***  
 |-**$GOPATH**  
-  |-**gowork**  
-    |- application  
-    |- convertor  
-    |- net  
-    |-...  
-  |-**PROJv1**  
-    |- source file  
-    |- source file  
-    |- ...  
+--|-**gowork**  
+----|- application  
+----|- convertor  
+----|- net  
+----|-...  
+--|-**PROJv1**  
+----|- source file  
+----|- source file  
+----|- ...  
 
 My GOPATH is set to ```/home/tynia/Go```.
 I clone [**gowork**](https://github.com/tynia/gowork) under the path ```/home/tynia/Go/src```.
