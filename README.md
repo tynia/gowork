@@ -108,17 +108,17 @@ Those items mentioned above are the base need of a server application. And they 
 The sample code located in ```gowork/sample/sample.go``` is an example of http server.
 
 ```
-# cd gowork
+# cd $GOPATH/gowork/sample
 # go build
 ```
 
-It will product an executable file named ***```app```***, after you do ```go build```.
+It will product an executable file named ***```sample```***, after you do ```go build```.
 
 ```
-./app -c config.json-path
+./sample -c config.json-path
 ```
 
-**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the ***```app```*** built will run using the default path ***```conf/config.json```***
+**NOTICE**: The ***```config.json-path```*** in command line should be specified, or the ***```sample```*** built will run using the default path ***```conf/config.json```***
 
 #### [Using ***gowork*** as a library]
 * clone ***gowork*** in your ```$GOPATH/src```.
