@@ -127,7 +127,7 @@ It will product an executable file named ***```app```***, after you do ```go bui
 My GOPATH is set to ```/home/tynia/Go```.  
 I clone [**gowork**](https://github.com/tynia/gowork) under the path ```/home/tynia/Go/src```.  
 Then the **gowork** is located as ```/home/tynia/Go/src/gowork```.  
-I create a directory named ***PROJv1*** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in ***PROJv1***.
+I create a directory named **PROJv1** under the path ```/home/tynia/Go/src```(the samle level with **gowork**). Then we write code in **PROJv1**.  
 **SOURCE TREE** is as follows:
 ```
 |- $GOPATH  
