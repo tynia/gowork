@@ -1,11 +1,10 @@
-
 package error
 
 var (
 	// OK
 	ERR_CODE_OK = 0
 	ERR_STR_OK = "ok"
-	
+
 	// SYSTEM ERROR CODE
 	ERR_CODE_SYS = 1000
 	ERR_STR_SYS = "system error"
@@ -42,7 +41,7 @@ var (
 	ERR_STR_CONVERT_NIL = "invalid value"
 	ERR_CODE_CONVERT_TYPE = 2000
 	ERR_STR_CONVERT_TYPE = "type mismatch"
-	
+
 	// UNKNOWN ERROR
 	// ERR_CODE_UNKNOWN = 1900
 	ERR_STR_UNKNOWN = "unknown error"
@@ -81,6 +80,6 @@ func fetchErrString(code int) string {
 	if !ok {
 		return ERR_STR_UNKNOWN
 	}
-	
+
 	return v
 }
