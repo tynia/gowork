@@ -7,10 +7,10 @@ import (
 /*
  * type: WError(Wrapper error)
  * function : to return more detail message
-*/
+ */
 type WError struct {
-	eCode int
-	eDetail  string
+	eCode   int
+	eDetail string
 }
 
 func (err *WError) Code() int {
@@ -18,7 +18,7 @@ func (err *WError) Code() int {
 }
 
 func (err *WError) Error() string {
-	return fmt.Sprintf("[%s] %s", fetchErrString(err.eCode), err.eDetail)
+	return fmt.Sprintf("[%d] %s", fetchErrString(err.eCode), err.eDetail)
 	//return err.eDetail
 }
 
@@ -36,7 +36,7 @@ func NewWError(code int, format string, args ...interface{}) *WError {
 		detail = fmt.Sprintf(format, args...)
 	}
 	err := &WError{
-		eCode: code,
+		eCode:   code,
 		eDetail: detail,
 	}
 
@@ -45,7 +45,7 @@ func NewWError(code int, format string, args ...interface{}) *WError {
 
 func WrapError(code int, e error) *WError {
 	err := &WError{
-		eCode: code,
+		eCode:   code,
 		eDetail: e.Error(),
 	}
 
