@@ -85,7 +85,7 @@ func GetLogBtInfo(level int) string {
 		return ""
 	}
 	format := ""
-	level +=  1 //函数自身占一层
+	level += 1 //函数自身占一层
 	_, file, line, ok := runtime.Caller(level)
 	if ok == true {
 		file = filepath.Base(file)
@@ -103,11 +103,9 @@ func Log(level logLevel, format string, values ...interface{}) {
 	DefaultLogger.Log(level, format, values...)
 }
 
-
 func Warning(format string, values ...interface{}) {
 	DefaultLogger.Log(WARNING, format, values...)
 }
-
 
 func ResetLogLevel(level string) {
 	DefaultLogger.ResetLogLevel(level)

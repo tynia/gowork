@@ -1,16 +1,16 @@
 package net
 
 import (
-	"net/http"
-	"io/ioutil"
-	"io"
-	"encoding/json"
 	"bytes"
-	"strings"
-	"time"
+	"encoding/json"
 	"fmt"
 	e "gowork/error"
 	"gowork/extern/logging"
+	"io"
+	"io/ioutil"
+	"net/http"
+	"strings"
+	"time"
 )
 
 var (
@@ -26,17 +26,17 @@ var (
 )
 
 type HTTPRequest struct {
-	Method string
-	URL    string
-	UserID string
+	Method       string
+	URL          string
+	UserID       string
 	X_Auth_Token string
-	Form interface{}
-	Body interface{}
+	Form         interface{}
+	Body         interface{}
 }
 
 type HTTPResponse struct {
-	Code int     `json:"code, omitempty"`
-	Msg  string  `json:"msg, omitempty"`
+	Code int         `json:"code, omitempty"`
+	Msg  string      `json:"msg, omitempty"`
 	Data interface{} `json:"data, omitempty"`
 }
 
@@ -217,7 +217,7 @@ func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
 func GetResponseData(err *e.WError, data interface{}) []byte {
 	resp := &HTTPResponse{}
 	if err == nil {
-		resp.Code = 0;
+		resp.Code = 0
 		resp.Msg = "ok"
 	} else {
 		resp.Code = err.Code()
@@ -245,9 +245,9 @@ func LogGetResponseData(req *http.Request, err *e.WError, data interface{}) []by
 
 	logReq := HTTPRequest{
 		Method: req.Method,
-		URL: req.RequestURI,
-		Form: req.Form,
-		Body: body,
+		URL:    req.RequestURI,
+		Form:   req.Form,
+		Body:   body,
 	}
 	logging.Info("HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))

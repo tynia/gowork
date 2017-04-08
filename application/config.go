@@ -1,28 +1,28 @@
 package application
 
 import (
-	"io"
-	"os"
-	"io/ioutil"
 	"bytes"
 	"encoding/json"
 	e "gowork/error"
+	"io"
+	"io/ioutil"
+	"os"
 )
 
 type configure struct {
 	Log struct {
-		Level  string           // logging level (error/warning/info/debug)
-		Suffix string           // logging file name suffix	
+		Level  string // logging level (error/warning/info/debug)
+		Suffix string // logging file name suffix
 	}
 
 	Prog struct {
-		CPU        int          // cpu in use
-		Deamon     bool         // you know
-		HealthPort string       // health port for monitor
+		CPU        int    // cpu in use
+		Deamon     bool   // you know
+		HealthPort string // health port for monitor
 	}
 
 	Server struct {
-		PortInfo string         // serve port
+		PortInfo string // serve port
 	}
 }
 
@@ -34,7 +34,7 @@ func ParseJSON(path string, v interface{}) *e.WError {
 		}
 		return e.NewWError(e.ERR_CODE_PARA, "Failed to stat config file[path: %s]", path)
 	}
-	
+
 	mode := info.Mode()
 	if mode.IsDir() {
 		return e.NewWError(e.ERR_CODE_PARA, "Invalid config file[path: %s], it is a directory", path)

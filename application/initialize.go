@@ -1,13 +1,13 @@
 package application
 
 import (
-	"os"
-	"fmt"
 	"flag"
-	"runtime"
-	"path/filepath"
-	"gowork/extern/logging"
+	"fmt"
 	e "gowork/error"
+	"gowork/extern/logging"
+	"os"
+	"path/filepath"
+	"runtime"
 )
 
 func initConfigure(v interface{}) *e.WError {

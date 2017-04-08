@@ -1,22 +1,22 @@
 package application
 
 import (
-	"os"
-	"os/signal"
-	"syscall"
-	"strconv"
 	"fmt"
-	"runtime"
-	"time"
-	"gowork/net"
 	e "gowork/error"
 	"gowork/extern/logging"
+	"gowork/net"
+	"os"
+	"os/signal"
+	"runtime"
+	"strconv"
+	"syscall"
+	"time"
 )
 
 var (
-	shutdown = make(chan os.Signal)
-	running  = make(chan bool)
-	hup      = make(chan os.Signal)
+	shutdown   = make(chan os.Signal)
+	running    = make(chan bool)
+	hup        = make(chan os.Signal)
 	dumpPrefix = "panic"
 	dumpMode   = os.FileMode(0777)
 	dumpFlag   = os.O_CREATE | os.O_WRONLY
@@ -45,24 +45,24 @@ var (
 )
 
 type Application struct {
-	appName    string
-	baseConfig *configure
-	health Handler
-	handler Handler
+	appName     string
+	baseConfig  *configure
+	health      Handler
+	handler     Handler
 	initHandler InitHandlerFunc
-	config  map[string]interface{}
-	handlerMap map[string]net.HandlerFunc
+	config      map[string]interface{}
+	handlerMap  map[string]net.HandlerFunc
 }
 
 func NewApplication(name string, conf map[string]interface{}) *Application {
-	App := &Application {
-		appName: name,
-		baseConfig: new(configure),
-		health: nil,
-		handler: nil,
+	App := &Application{
+		appName:     name,
+		baseConfig:  new(configure),
+		health:      nil,
+		handler:     nil,
 		initHandler: nil,
-		config: conf,
-		handlerMap: make(map[string]net.HandlerFunc),
+		config:      conf,
+		handlerMap:  make(map[string]net.HandlerFunc),
 	}
 
 	return App
@@ -75,10 +75,10 @@ func (app *Application) signal() {
 	go func() {
 		for {
 			select {
-				case <-shutdown:
-					logging.Info("[Application.signal] receive signal SIGINT or SIGTERM, to stop server...")
-					running <- false
-				case <-hup:
+			case <-shutdown:
+				logging.Info("[Application.signal] receive signal SIGINT or SIGTERM, to stop server...")
+				running <- false
+			case <-hup:
 			}
 		}
 	}()
@@ -101,9 +101,9 @@ func (app *Application) dump() (*os.File, *e.WError) {
 
 func (app *Application) initBaseModule() *e.WError {
 	err := initLogger(app.appName,
-					  app.baseConfig.Log.Level,
-					  app.baseConfig.Log.Suffix,
-					  app.baseConfig.Prog.Deamon )
+		app.baseConfig.Log.Level,
+		app.baseConfig.Log.Suffix,
+		app.baseConfig.Prog.Deamon)
 	if err != nil {
 		logging.Error("[Application.initBaseModule] Initialize logger moduler failed, error = %s", err.Error())
 		return err
@@ -224,12 +224,12 @@ func (app *Application) Go() *e.WError {
 	// register handler
 	app.register()
 	// run
-	err = app.run();
+	err = app.run()
 	if err != nil {
 		logging.Error("[Application.Go] Error in running application, error = %s", err.Error())
 		return err
 	}
 
-	<- running
+	<-running
 	return err
 }

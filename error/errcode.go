@@ -3,51 +3,51 @@ package error
 var (
 	// OK
 	ERR_CODE_OK = 0
-	ERR_STR_OK = "ok"
+	ERR_STR_OK  = "ok"
 
 	// SYSTEM ERROR CODE
 	ERR_CODE_SYS = 1000
-	ERR_STR_SYS = "system error"
+	ERR_STR_SYS  = "system error"
 	// TODO: ADD OTHER NEW SYSTEM ERROR, see auth error as example
 	ERR_CODE_IO = 1001
-	ERR_STR_IO = "i/o error"
+	ERR_STR_IO  = "i/o error"
 
 	// DATABASE ERROR CODE
 	ERR_CODE_DB = 1100
-	ERR_STR_DB = "db error"
+	ERR_STR_DB  = "db error"
 	// TODO: ADD OTHER NEW DATABASE ERROR, see auth error as example
 
 	// NETWORK ERROR CODE
 	ERR_CODE_NETWORK = 1200
-	ERR_STR_NETWORK = "network error"
+	ERR_STR_NETWORK  = "network error"
 	// TODO: ADD OTHER NEW NETWORK ERROR, see auth error as example
 
 	// PARAMETER ERROR CODE
 	ERR_CODE_PARA = 1300
-	ERR_STR_PARA = "parameter error"
-	// TODO: ADD OTHER NEW PARAMETER ERROR, 
+	ERR_STR_PARA  = "parameter error"
+	// TODO: ADD OTHER NEW PARAMETER ERROR,
 
 	// AUTH ERROR CODE
 	ERR_CODE_AUTH = 1400
-	ERR_STR_AUTH = "auth failed"
+	ERR_STR_AUTH  = "auth failed"
 
 	// TODO: ADD OTHER NEW AUTH ERROR, AFTER ERR_CODE_AUTH_EXPIRED AS BELOW
 	ERR_CODE_AUTH_EXPIRED = 1401
-	ERR_STR_AUTH_EXPIRED = "auth expired"
+	ERR_STR_AUTH_EXPIRED  = "auth expired"
 
-	ERR_CODE_CONVERT = 2000
-	ERR_STR_CONVERT = "convert error"
-	ERR_CODE_CONVERT_NIL = 2001
-	ERR_STR_CONVERT_NIL = "invalid value"
+	ERR_CODE_CONVERT      = 2000
+	ERR_STR_CONVERT       = "convert error"
+	ERR_CODE_CONVERT_NIL  = 2001
+	ERR_STR_CONVERT_NIL   = "invalid value"
 	ERR_CODE_CONVERT_TYPE = 2000
-	ERR_STR_CONVERT_TYPE = "type mismatch"
+	ERR_STR_CONVERT_TYPE  = "type mismatch"
 
 	// UNKNOWN ERROR
 	// ERR_CODE_UNKNOWN = 1900
 	ERR_STR_UNKNOWN = "unknown error"
 	// TODO: ADD OTHER NEW UNKNOW ERROR, see auth error as example
 
-	errMap = make(map[int] string)
+	errMap = make(map[int]string)
 )
 
 func init() {
