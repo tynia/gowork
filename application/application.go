@@ -55,14 +55,18 @@ type Application struct {
 }
 
 func NewApplication(name string, conf map[string]interface{}) *Application {
-	App := &Application{
+	App = &Application{
 		appName:     name,
 		baseConfig:  new(configure),
 		health:      nil,
 		handler:     nil,
 		initHandler: nil,
-		config:      conf,
+		config:      make(map[string]interface{}),
 		handlerMap:  make(map[string]net.HandlerFunc),
+	}
+
+	for k, v := range conf {
+		App.Set(k, v)
 	}
 
 	return App
@@ -200,10 +204,15 @@ func (app *Application) Go() *e.WError {
 	}()
 
 	// parse config file content
-	err = initConfigure(app.baseConfig)
+	total := &map[string]interface{}{}
+	err = initConfigure(app.baseConfig, &total)
 	if err != nil {
 		logging.Error("[Application.Go] Cannot parse config file, error = %s", err.Error())
 		return err
+	}
+
+	for k, v := range *total {
+		app.Set(k, v)
 	}
 
 	// init logger

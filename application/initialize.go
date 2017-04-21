@@ -8,13 +8,27 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"encoding/json"
 )
 
-func initConfigure(v interface{}) *e.WError {
+func initConfigure(base interface{}, v interface{}) *e.WError {
 	path := flag.String("c", "conf/config.json", "-c config-file-path")
 	flag.Parse()
 
-	return ParseJSON(*path, v)
+	if v == nil {
+		 return ParseJSON(*path, base)
+	}
+
+	err := ParseJSON(*path, v)
+	if err != nil {
+		logging.Error("[initConfigure] parse config json failed, error = %s", err.Error())
+		return err
+	}
+
+	txt, _ := json.Marshal(v)
+	_ = json.Unmarshal(txt, base)
+
+	return nil
 }
 
 func initLogger(appName, level, suffix string, daemon bool) *e.WError {
