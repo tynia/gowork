@@ -146,4 +146,4 @@ I create a directory named **PROJv1** under the path ```/home/tynia/Go/src```(th
 ### Fork me at GITHUB
 There are more features, and shall we add them one by one?
 
-```At last, Happy your coding.```
+```HAPPY YOUR CODING.```
