@@ -18,7 +18,7 @@ func (err *WError) Code() int {
 }
 
 func (err *WError) Error() string {
-	return fmt.Sprintf("[%d] %s", fetchErrString(err.eCode), err.eDetail)
+	return fmt.Sprintf("[%s] %s", fetchErrString(err.eCode), err.eDetail)
 	//return err.eDetail
 }
 
