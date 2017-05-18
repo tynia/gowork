@@ -196,6 +196,9 @@ func Call(name string, url string, method string, content string, contentType st
 }
 
 func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
+
+	alter := map[string]interface{}{}
+
 	buff := bytes.NewBufferString("")
 	_, err := io.Copy(buff, req.Body)
 	if err != nil {
@@ -205,13 +208,17 @@ func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
 	text := buff.String()
 	req.Body = ioutil.NopCloser(strings.NewReader(text))
 
-	err = json.Unmarshal([]byte(text), v)
+	if v == nil {
+		err = json.Unmarshal([]byte(text), alter)
+	} else {
+		err = json.Unmarshal([]byte(text), v)
+	}
 	if err != nil {
 		logging.Error("[GetRequestBody] Failed to unmarshal json body error, text = %s, error = %s", text, err.Error())
 		return nil, e.NewWError(e.ERR_CODE_IO, "Failed to unmarshal json body, error = %s", err.Error())
 	}
 
-	return v, nil
+	return alter, nil
 }
 
 func GetResponseData(err *e.WError, data interface{}) []byte {
