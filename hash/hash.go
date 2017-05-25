@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"crypto/sha256"
 	"encoding/hex"
+	"hash/fnv"
 )
 
 var (
@@ -36,6 +37,31 @@ func GenHashString32(ts uint64, key string) string {
 	strHash := hs.Sum(nil)
 	suffix = hex.EncodeToString(strHash[len(key):len(key)+8])
 	id = prefix + suffix + strconv.FormatUint(100000 + tmpIncId, 10)
+
+	return id
+}
+
+
+func GenHashString64(ts uint64, key string) string {
+
+	if ts <= 0 {
+		ts = uint64(time.Now().Unix())
+	}
+
+	digest := strconv.FormatUint(ts, 10)
+	hs := fnv.New64a()
+	hs.Write([]byte(digest))
+	prefix := hs.Sum(nil)
+	hs.Write([]byte(key))
+	strHash := hs.Sum(nil)
+	id := hex.EncodeToString(prefix) + hex.EncodeToString(strHash)
+
+	hs = fnv.New64()
+	hs.Write([]byte(digest))
+	prefix = hs.Sum(nil)
+	hs.Write([]byte(key))
+	strHash = hs.Sum(nil)
+	id += hex.EncodeToString(prefix) + hex.EncodeToString(strHash)
 
 	return id
 }
