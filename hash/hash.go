@@ -16,7 +16,7 @@ var (
 )
 
 
-func GenHashString32(ts uint64, key string) string {
+func GenHashString32(ts uint64, keys... string) string {
 	var id string
 	var prefix string
 	var suffix string
@@ -33,7 +33,9 @@ func GenHashString32(ts uint64, key string) string {
 
 	prefix = strconv.FormatUint(ts, 10)
 	hs := sha256.New()
-	io.WriteString(hs, key)
+	for _, key := range keys {
+		io.WriteString(hs, key)
+	}
 	strHash := hs.Sum(nil)
 	suffix = hex.EncodeToString(strHash[len(key):len(key)+8])
 	id = prefix + suffix + strconv.FormatUint(100000 + tmpIncId, 10)
@@ -42,7 +44,7 @@ func GenHashString32(ts uint64, key string) string {
 }
 
 
-func GenHashString64(ts uint64, key string) string {
+func GenHashString64(ts uint64, keys... string) string {
 
 	if ts <= 0 {
 		ts = uint64(time.Now().Unix())
@@ -52,6 +54,7 @@ func GenHashString64(ts uint64, key string) string {
 	hs := fnv.New64a()
 	hs.Write([]byte(digest))
 	prefix := hs.Sum(nil)
+	key := keys[0]
 	hs.Write([]byte(key))
 	strHash := hs.Sum(nil)
 	id := hex.EncodeToString(prefix) + hex.EncodeToString(strHash)
@@ -59,7 +62,10 @@ func GenHashString64(ts uint64, key string) string {
 	hs = fnv.New64()
 	hs.Write([]byte(digest))
 	prefix = hs.Sum(nil)
-	hs.Write([]byte(key))
+	idx := 1
+	for idx < len(keys) {
+		hs.Write([]byte(keys[idx]))
+	}
 	strHash = hs.Sum(nil)
 	id += hex.EncodeToString(prefix) + hex.EncodeToString(strHash)
 
