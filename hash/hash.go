@@ -37,7 +37,7 @@ func GenHashString32(ts uint64, keys... string) string {
 		io.WriteString(hs, key)
 	}
 	strHash := hs.Sum(nil)
-	suffix = hex.EncodeToString(strHash[len(key):len(key)+8])
+	suffix = hex.EncodeToString(strHash[len(keys):len(keys)+8])
 	id = prefix + suffix + strconv.FormatUint(100000 + tmpIncId, 10)
 
 	return id
