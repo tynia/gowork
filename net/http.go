@@ -256,7 +256,32 @@ func LogGetResponseData(req *http.Request, err *e.WError, data interface{}) []by
 		Form:   req.Form,
 		Body:   body,
 	}
-	logging.Info("HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
+
+	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
+	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
+
+	return ret
+}
+
+func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data interface{}) []byte {
+	ret := GetResponseData(err, data)
+
+	body := ""
+	b_body, ee := ioutil.ReadAll(req.Body)
+	if ee == nil {
+		body = string(b_body)
+	}
+
+	logReq := HTTPRequest{
+		Method: req.Method,
+		URL:    req.RequestURI,
+		Form:   req.Form,
+		Body:   body,
+	}
+
+	cost := time.Now().UnixNano() - sTime
+	logging.Info( "HANDLE_TIME: %d ms", cost / 1000000)
+	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 
 	return ret
