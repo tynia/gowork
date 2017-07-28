@@ -2,15 +2,16 @@ package application
 
 import (
 	"fmt"
-	e "gowork/error"
-	"gowork/extern/logging"
-	"gowork/net"
 	"os"
 	"os/signal"
 	"runtime"
 	"strconv"
 	"syscall"
 	"time"
+	"gowork/convertor"
+	"gowork/extern/logging"
+	"gowork/net"
+	e "gowork/error"
 )
 
 var (
@@ -170,6 +171,22 @@ func (app *Application) Get(key string) interface{} {
 
 	logging.Error("[Application.Get] Failed to get value of key[%s], value is NULL", key)
 	return nil
+}
+
+func (app *Application) GetString(key string) (string, *e.WError ){
+	v := app.Get(key)
+	if v != nil {
+		logging.Error("[Application.GetString] cannot get string value of key: %s", key)
+		return "", e.NewWError(e.ERR_CODE_PARA, "recognized key: %s", key)
+	}
+
+	str, err := convertor.ToString(v)
+	if err != nil {
+		logging.Error("[Application.GetString] cannot get string value of key: %s, error = %s", key, err.Error())
+		return "", err
+	}
+
+	return str, nil
 }
 
 func (app *Application) AddHandlerFunc(addr string, handler net.HandlerFunc) {
