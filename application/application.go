@@ -8,7 +8,6 @@ import (
 	"strconv"
 	"syscall"
 	"time"
-	"gowork/convertor"
 	"gowork/extern/logging"
 	"gowork/net"
 	e "gowork/error"
@@ -51,18 +50,18 @@ type Application struct {
 	health      Handler
 	handler     Handler
 	initHandler InitHandlerFunc
-	config      map[string]interface{}
+	config      map[string]string
 	handlerMap  map[string]net.HandlerFunc
 }
 
-func NewApplication(name string, conf map[string]interface{}) *Application {
+func NewApplication(name string, conf map[string]string) *Application {
 	App = &Application{
 		appName:     name,
 		baseConfig:  new(configure),
 		health:      nil,
 		handler:     nil,
 		initHandler: nil,
-		config:      make(map[string]interface{}),
+		config:      make(map[string]string),
 		handlerMap:  make(map[string]net.HandlerFunc),
 	}
 
@@ -154,39 +153,22 @@ func (app *Application) SetInitHandler(handler InitHandlerFunc) {
 	app.initHandler = handler
 }
 
-func (app *Application) Set(key string, value interface{}) {
+func (app *Application) Set(key string, value string) {
 	if v, ok := app.config[key]; ok {
 		logging.Warning("[Application.Set] Try to replace value[%#+v] to key = %s, original value: %s", value, key, v)
-		//return e.NewWError(e.ERR_CODE_PARA, "Failed to insert value[%#+v] into config, key = %s", value, key)
 	}
 
 	app.config[key] = value
 	logging.Info("[Application.Set] Add/Replace [key: %s, value: %#+v] into config ok", key, value)
 }
 
-func (app *Application) Get(key string) interface{} {
+func (app *Application) Get(key string) string {
 	if v, ok := app.config[key]; ok {
 		return v
 	}
 
 	logging.Error("[Application.Get] Failed to get value of key[%s], value is NULL", key)
-	return nil
-}
-
-func (app *Application) GetString(key string) (string, *e.WError ){
-	v := app.Get(key)
-	if v != nil {
-		logging.Error("[Application.GetString] cannot get string value of key: %s", key)
-		return "", e.NewWError(e.ERR_CODE_PARA, "recognized key: %s", key)
-	}
-
-	str, err := convertor.ToString(v)
-	if err != nil {
-		logging.Error("[Application.GetString] cannot get string value of key: %s, error = %s", key, err.Error())
-		return "", err
-	}
-
-	return str, nil
+	return ""
 }
 
 func (app *Application) AddHandlerFunc(addr string, handler net.HandlerFunc) {
@@ -221,7 +203,7 @@ func (app *Application) Go() *e.WError {
 	}()
 
 	// parse config file content
-	total := &map[string]interface{}{}
+	total := &map[string]string{}
 	err = initConfigure(app.baseConfig, &total)
 	if err != nil {
 		logging.Error("[Application.Go] Cannot parse config file, error = %s", err.Error())

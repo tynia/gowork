@@ -2,223 +2,140 @@ package convertor
 
 import (
 	e "gowork/error"
+	"strconv"
 )
 
-func ToInt(v interface{}) (int, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if i, ok := v.(int); ok {
-		return i, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToInt8(v interface{}) (int8, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if i8, ok := v.(int8); ok {
-		return i8, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToInt16(v interface{}) (int16, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if i16, ok := v.(int16); ok {
-		return i16, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToInt32(v interface{}) (int32, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if i32, ok := v.(int32); ok {
-		return i32, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToInt64(v interface{}) (int64, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if i64, ok := v.(int64); ok {
-		return i64, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToRune(v interface{}) (rune, *e.WError) {
-	i, err := ToInt(v)
+func ToInt(v string) (int, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 32)
 	if err != nil {
-		return rune(i), err
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	return rune(i), nil
+	return int(i64), nil
 }
 
-func ToUint(v interface{}) (uint, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if ui, ok := v.(uint); ok {
-		return ui, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToUint8(v interface{}) (uint8, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
-	}
-
-	if ui8, ok := v.(uint8); ok {
-		return ui8, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
-}
-
-func ToByte(v interface{}) (byte, *e.WError) {
-	ui8, err := ToUint8(v)
+func ToInt8(v string) (int8, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 8)
 	if err != nil {
-		return byte(ui8), err
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	return byte(ui8), nil
+	return int8(i64), nil
 }
 
-func ToUint16(v interface{}) (uint16, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToInt16(v string) (int16, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 16)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	if ui16, ok := v.(uint16); ok {
-		return ui16, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return int16(i64), nil
 }
 
-func ToUint32(v interface{}) (uint32, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToInt32(v string) (int32, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 32)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	if ui32, ok := v.(uint32); ok {
-		return ui32, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return int32(i64), nil
 }
 
-func ToUint64(v interface{}) (uint64, *e.WError) {
-	if v == nil {
-		return 0, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToInt64(v string) (int64, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 64)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	if ui64, ok := v.(uint64); ok {
-		return ui64, nil
-	}
-
-	return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return i64, nil
 }
 
-func ToFloat32(v interface{}) (float32, *e.WError) {
-	var f32 float32
-	if v == nil {
-		return f32, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToRune(v string) (rune, *e.WError) {
+	i64, err := strconv.ParseInt(v, 10, 32)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	var ok bool
-	if f32, ok = v.(float32); ok {
-		return f32, nil
-	}
-
-	return f32, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return rune(i64), nil
 }
 
-func ToFloat64(v interface{}) (float64, *e.WError) {
-	var f64 float64
-	if v == nil {
-		return f64, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToUint(v string) (uint, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 32)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	var ok bool
-	if f64, ok = v.(float64); ok {
-		return f64, nil
-	}
-
-	return f64, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return uint(ui64), nil
 }
 
-func ToBool(v interface{}) (bool, *e.WError) {
-	if v == nil {
-		return false, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToUint8(v string) (uint8, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 8)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	if b, ok := v.(bool); ok {
-		return b, nil
-	}
-
-	return false, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return uint8(ui64), nil
 }
 
-func ToString(v interface{}) (string, *e.WError) {
-	if v == nil {
-		return "", e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToByte(v string) (byte, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 8)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	if str, ok := v.(string); ok {
-		return str, nil
-	}
-
-	return "", e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return uint8(ui64), nil
 }
 
-func ToComplex64(v interface{}) (complex64, *e.WError) {
-	var comp64 complex64
-	if v == nil {
-		return comp64, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToUint16(v string) (uint16, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 16)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	var ok bool
-	if comp64, ok = v.(complex64); ok {
-		return comp64, nil
-	}
-
-	return comp64, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return uint16(ui64), nil
 }
 
-func ToComplex128(v interface{}) (complex128, *e.WError) {
-	var comp128 complex128
-
-	if v == nil {
-		return comp128, e.NewWError(e.ERR_CODE_CONVERT_NIL, "Invalid in value[v: %#+v]", v)
+func ToUint32(v string) (uint32, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 32)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	var ok bool
-	if comp128, ok = v.(complex128); ok {
-		return comp128, nil
+	return uint32(ui64), nil
+}
+
+func ToUint64(v string) (uint64, *e.WError) {
+	ui64, err := strconv.ParseUint(v, 10, 64)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
 	}
 
-	return comp128, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, v: %#+v", v)
+	return ui64, nil
+}
+
+func ToFloat32(v string) (float32, *e.WError) {
+	f64, err := strconv.ParseFloat(v, 32)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
+	}
+
+	return float32(f64), nil
+}
+
+func ToFloat64(v string) (float64, *e.WError) {
+	f64, err := strconv.ParseFloat(v, 64)
+	if err != nil {
+		return 0, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "type mismatch, value: \"%s\"", v)
+	}
+
+	return f64, nil
+}
+
+func ToBool(v string) (bool, *e.WError) {
+	ok, err := strconv.ParseBool(v)
+	if err != nil {
+		return false, e.NewWError(e.ERR_CODE_CONVERT_TYPE, "unknown mismatch, value: \"%s\"", v)
+	}
+
+	return ok, nil
 }
