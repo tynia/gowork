@@ -27,7 +27,7 @@ It is a simple framework for server application development.
 When using the **gowork**, you need to do as follows(**REMEMBER TO ADD YOUR GOPATH AS THE PREFIX OF GOWORK**):
 ```
 import (
-    "gowork/application"
+    "gowork/service"
     "gowork/convertor"
     ... // other imports you need
 )
@@ -35,7 +35,7 @@ import (
 ...
 
 func main() {
-    config := map[string]interface{}{}
+    config := map[string]string{}
     // set an value into map
     value := "hello, gowork !"
     config["say"] = value
