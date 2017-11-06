@@ -104,10 +104,11 @@ func (app *Application) dump() (*os.File, *e.WError) {
 }
 
 func (app *Application) initBaseModule() *e.WError {
+
 	err := initLogger(app.appName,
 		app.baseConfig.Log.Level,
 		app.baseConfig.Log.Suffix,
-		app.baseConfig.Prog.Deamon)
+		app.baseConfig.Prog.Daemon)
 	if err != nil {
 		logging.Error("[Application.initBaseModule] Initialize logger moduler failed, error = %s", err.Error())
 		return err
@@ -203,7 +204,7 @@ func (app *Application) Go() *e.WError {
 	}()
 
 	// parse config file content
-	total := &map[string]string{}
+	total := &map[string]interface{}{}
 	err = initConfigure(app.baseConfig, &total)
 	if err != nil {
 		logging.Error("[Application.Go] Cannot parse config file, error = %s", err.Error())
@@ -211,7 +212,9 @@ func (app *Application) Go() *e.WError {
 	}
 
 	for k, v := range *total {
-		app.Set(k, v)
+		if str, ok := v.(string); ok {
+			app.Set(k, str)
+		}
 	}
 
 	// init logger

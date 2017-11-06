@@ -16,8 +16,8 @@ type configure struct {
 	}
 
 	Prog struct {
-		CPU        int    // cpu in use
-		Deamon     bool   // you know
+		CPU        int // cpu in use
+		Daemon     bool // you know
 		HealthPort string // health port for monitor
 	}
 
