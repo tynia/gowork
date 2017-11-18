@@ -257,7 +257,8 @@ func LogGetResponseData(req *http.Request, err *e.WError, data interface{}) []by
 		Body:   body,
 	}
 
-	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
+	strReq, _ := json.Marshal(logReq)
+	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, strReq)
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 
 	return ret
@@ -279,9 +280,10 @@ func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data in
 		Body:   body,
 	}
 
+	strReq, _ := json.Marshal(logReq)
 	cost := time.Now().UnixNano() - sTime
 	logging.Info( "HANDLE_TIME: %d ms", cost / 1000000)
-	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, logReq)
+	logging.Info( "HANDLE_LOG: url = %s, request = %#v", req.RequestURI, strReq)
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 
 	return ret

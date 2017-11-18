@@ -3,6 +3,7 @@ package convertor
 import (
 	e "gowork/error"
 	"strconv"
+	"strings"
 )
 
 func ToInt(v string) (int, *e.WError) {
@@ -138,4 +139,8 @@ func ToBool(v string) (bool, *e.WError) {
 	}
 
 	return ok, nil
+}
+
+func ToArray(v string, sep string) []string {
+	return strings.Split(v, sep)
 }
