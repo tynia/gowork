@@ -16,7 +16,7 @@ func initConfigure(base interface{}, v interface{}) *e.WError {
 	flag.Parse()
 
 	if v == nil {
-		 return ParseJSON(*path, base)
+		return ParseJSON(*path, base)
 	}
 
 	err := ParseJSON(*path, v)

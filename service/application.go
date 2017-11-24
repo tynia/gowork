@@ -204,14 +204,14 @@ func (app *Application) Go() *e.WError {
 	}()
 
 	// parse config file content
-	total := &map[string]interface{}{}
+	total := map[string]interface{}{}
 	err = initConfigure(app.baseConfig, &total)
 	if err != nil {
 		logging.Error("[Application.Go] Cannot parse config file, error = %s", err.Error())
 		return err
 	}
 
-	for k, v := range *total {
+	for k, v := range total {
 		if str, ok := v.(string); ok {
 			app.Set(k, str)
 		}
