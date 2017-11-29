@@ -10,7 +10,7 @@ import (
  */
 type WError struct {
 	eCode   int
-	eDetail string
+	eMsg    string
 }
 
 func (err *WError) Code() int {
@@ -18,15 +18,14 @@ func (err *WError) Code() int {
 }
 
 func (err *WError) Error() string {
-	return fmt.Sprintf("[%s] %s", fetchErrString(err.eCode), err.eDetail)
-	//return err.eDetail
+	return fmt.Sprintf("%s", err.eMsg)
 }
 
 func (err *WError) Detail() string {
 	if err.eCode == ERR_CODE_OK {
 		return "ok"
 	} else {
-		return fmt.Sprintf("Code: %d, Error: %s, Detail: %s", err.eCode, fetchErrString(err.eCode), err.eDetail)
+		return fmt.Sprintf("Code: %d, Error: %s", err.eCode, err.eMsg)
 	}
 }
 
@@ -37,7 +36,7 @@ func NewWError(code int, format string, args ...interface{}) *WError {
 	}
 	err := &WError{
 		eCode:   code,
-		eDetail: detail,
+		eMsg: detail,
 	}
 
 	return err
@@ -45,8 +44,8 @@ func NewWError(code int, format string, args ...interface{}) *WError {
 
 func WrapError(code int, e error) *WError {
 	err := &WError{
-		eCode:   code,
-		eDetail: e.Error(),
+		eCode: code,
+		eMsg:  e.Error(),
 	}
 
 	return err
