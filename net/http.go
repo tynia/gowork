@@ -280,8 +280,8 @@ func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data in
 	//}
 
 	cost := time.Now().UnixNano() - sTime
-	logging.Info( "HANDLE_TIME: %d ms", cost / 1000000)
-	logging.Debug( "HANDLE_LOG: url = %s, method: %s, request = %s", req.RequestURI, req.Method, string(body))
+	logging.Info( "HANDLE_TIME: %d ms", cost / 1e6)
+	logging.Info( "HANDLE_LOG: url = %s, method: %s, request = %s", req.RequestURI, req.Method, string(body))
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 
 	return ret
