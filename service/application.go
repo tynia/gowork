@@ -129,10 +129,11 @@ func (app *Application) register() {
 func (app *Application) run() *e.WError {
 	// service
 	if app.baseConfig.Server.PortInfo == "" {
-		return e.NewWError(e.ERR_CODE_PARA, "Invalid Serve port for application, port: %#+v", app.baseConfig.Server.PortInfo)
+		logging.Warning("[application.run] not valid serve port, try to run with no serve")
+		return nil //e.NewWError(e.ERR_CODE_PARA, "Invalid Serve port for application, port: %#+v", app.baseConfig.Server.PortInfo)
+	} else {
+		net.Serve(app.baseConfig.Server.PortInfo, app.handler)
 	}
-
-	net.Serve(app.baseConfig.Server.PortInfo, app.handler)
 
 	// health
 	if app.baseConfig.Prog.HealthPort != "" && app.health != nil {

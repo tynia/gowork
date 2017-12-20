@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-var (
+const (
 	HTTP_METHOD_GET    = "GET"
 	HTTP_METHOD_PUT    = "PUT"
 	HTTP_METHOD_POST   = "POST"
@@ -23,6 +23,7 @@ var (
 	CONTENT_NONE = ""
 	CONTENT_JSON = "application/json"
 	CONTENT_YAML = "application/yaml"
+	CONTENT_MIME = "application/mime"
 )
 
 type HTTPRequest struct {
@@ -117,7 +118,7 @@ func (req *Request) AddHeader(key string, value string) {
 func (req *Request) DoRequest(resp interface{}) (*http.Response, *e.WError) {
 	logging.Debug("[Request.DoRequest, id: %s] start connection[to: %s, method: %s, content: %s]", req.ID, req.URL, req.Method, req.Content)
 	client := &http.Client{}
-	client.Timeout = time.Duration(4 * time.Second)
+	//client.Timeout = time.Duration(4 * time.Second)
 
 	response, err := client.Do(req.Req)
 	if err != nil {
@@ -285,4 +286,19 @@ func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data in
 	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 
 	return ret
+}
+
+func ResponseWithLog(w http.ResponseWriter, req *http.Request, sTime int64, err *e.WError, data interface{}) {
+	ret := GetResponseData(err, data)
+	w.Write(ret)
+	body := ""
+	b_body, ee := ioutil.ReadAll(req.Body)
+	if ee == nil {
+		body = string(b_body)
+	}
+
+	cost := time.Now().UnixNano() - sTime
+	logging.Info("HANDLE_TIME: %d ms", cost / 1e6)
+	logging.Info("HANDLE_LOG: url = %s, method: %s, request = %s", req.RequestURI, req.Method, string(body))
+	logging.Debug("HANDLE_RESPONSE: response = %s", string(ret))
 }
