@@ -136,7 +136,7 @@ func (req *Request) DoRequest(resp interface{}) (*http.Response, *e.WError) {
 
 		text, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			logging.Error("[Request.DoRequest, id: %s] Failed to read body of response: %v", req.ID, response.Body)
+			logging.Error("[Request.DoRequest, id: %s] Failed to read body of response: %#+v", req.ID, response.Body)
 			return nil, e.NewWError(1003, err.Error())
 		}
 
@@ -182,6 +182,7 @@ func Call(name string, url string, method string, content string, contentType st
 	}
 
 	response, err := req.DoRequest(nil)
+	defer response.Body.Close()
 	if err != nil {
 		logging.Error("[Call, id: %s] Failed to do Request, error = %s", name, err.Error())
 		return "", err
@@ -189,7 +190,7 @@ func Call(name string, url string, method string, content string, contentType st
 
 	text, ee := ioutil.ReadAll(response.Body)
 	if ee != nil {
-		logging.Error("[Call, id: %s] Failed to read body of response: %v", name, response.Body)
+		logging.Error("[Call, id: %s] Failed to read body of response: %#+v", name, response.Body)
 		return "", e.NewWError(1003, ee.Error())
 	}
 
