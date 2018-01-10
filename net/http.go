@@ -182,12 +182,12 @@ func Call(name string, url string, method string, content string, contentType st
 	}
 
 	response, err := req.DoRequest(nil)
-	defer response.Body.Close()
 	if err != nil {
 		logging.Error("[Call, id: %s] Failed to do Request, error = %s", name, err.Error())
 		return "", err
 	}
 
+	defer response.Body.Close()
 	text, ee := ioutil.ReadAll(response.Body)
 	if ee != nil {
 		logging.Error("[Call, id: %s] Failed to read body of response: %#+v", name, response.Body)
