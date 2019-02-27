@@ -1,4 +1,4 @@
-package error
+package xerr
 
 const (
 	ERR_CODE_OK      = 0    // OK
