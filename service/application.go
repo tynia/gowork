@@ -11,7 +11,6 @@ import (
 	"strconv"
 	"syscall"
 	"time"
-	"k8s.io/kubernetes/third_party/golang/go/doc/testdata"
 )
 
 var (
