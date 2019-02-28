@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	e "gowork/error"
+	"gowork/xerr"
 	"gowork/extern/logging"
 	"io"
 	"io/ioutil"
@@ -42,7 +42,7 @@ type HTTPResponse struct {
 }
 
 type IRequest interface {
-	DoRequest(resp interface{}) *e.WError
+	DoRequest(resp interface{}) error
 }
 
 // warpper
@@ -115,7 +115,7 @@ func (req *Request) AddHeader(key string, value string) {
 	req.Req.Header.Add(key, value)
 }
 
-func (req *Request) DoRequest(resp interface{}) (*http.Response, *e.WError) {
+func (req *Request) DoRequest(resp interface{}) (*http.Response, error) {
 	logging.Debug("[Request.DoRequest, id: %s] start connection[to: %s, method: %s, content: %s]", req.ID, req.URL, req.Method, req.Content)
 	client := &http.Client{}
 	//client.Timeout = time.Duration(4 * time.Second)
@@ -123,12 +123,12 @@ func (req *Request) DoRequest(resp interface{}) (*http.Response, *e.WError) {
 	response, err := client.Do(req.Req)
 	if err != nil {
 		logging.Error("[Request.DoRequest] Failed to talk with remote server, error = %s, id: %s", err.Error(), req.ID)
-		return nil, e.NewWError(1003, "Failed to request to remote server[url: %s], error = %s", req.URL, err.Error())
+		return nil, xerr.New(1003, "Failed to request to remote server[url: %s], error = %s", req.URL, err.Error())
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		logging.Error("[Request.DoRequest] Error returns with code: %d, msg: %s", response.StatusCode, response.Status)
-		return nil, e.NewWError(1003, "Error returns with code: %d, msg: %s", response.StatusCode, response.Status)
+		return nil, xerr.New(1003, "Error returns with code: %d, msg: %s", response.StatusCode, response.Status)
 	}
 
 	if resp != nil {
@@ -137,13 +137,13 @@ func (req *Request) DoRequest(resp interface{}) (*http.Response, *e.WError) {
 		text, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			logging.Error("[Request.DoRequest, id: %s] Failed to read body of response: %#+v", req.ID, response.Body)
-			return nil, e.NewWError(1003, err.Error())
+			return nil, xerr.New(1003, err.Error())
 		}
 
 		err = json.Unmarshal(text, &resp)
 		if err != nil {
 			logging.Error("[Request.DoRequest, id: %s] json unmarshal, error: %s", req.ID, err.Error())
-			return nil, e.NewWError(1003, err.Error())
+			return nil, xerr.New(1003, err.Error())
 		}
 
 		return nil, nil
@@ -164,11 +164,11 @@ func Serialize(source map[string]interface{}) string {
 	return string(buff.Bytes())
 }
 
-func Call(name string, url string, method string, content string, contentType string, resp interface{}) (string, *e.WError) {
+func Call(name string, url string, method string, content string, contentType string, resp interface{}) (string, error) {
 	req := NewRequest(name, url, method, content, contentType)
 	if req == nil {
 		logging.Error("[Call, id: %s] Failed to create Request", name)
-		return "", e.NewWError(1003, "Failed to create Request")
+		return "", xerr.New(1003, "Failed to create Request")
 	}
 
 	if resp != nil {
@@ -194,13 +194,13 @@ func Call(name string, url string, method string, content string, contentType st
 	text, ee := ioutil.ReadAll(response.Body)
 	if ee != nil {
 		logging.Error("[Call, id: %s] Failed to read body of response: %#+v", name, response.Body)
-		return "", e.NewWError(1003, ee.Error())
+		return "", xerr.New(1003, ee.Error())
 	}
 
 	return string(text), nil
 }
 
-func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
+func GetRequestBody(req *http.Request, v interface{}) (interface{}, error) {
 
 	alter := map[string]interface{}{}
 
@@ -208,7 +208,7 @@ func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
 	_, err := io.Copy(buff, req.Body)
 	if err != nil {
 		logging.Error("[GetRequestBody] Failed to copy req body error, request = %v, error = %s", req.Body, err.Error())
-		return nil, e.NewWError(e.ERR_CODE_IO, "Failed to copy req body, error = %s", err.Error())
+		return nil, xerr.New(xerr.ERR_CODE_IO, "Failed to copy req body, error = %s", err.Error())
 	}
 	text := buff.String()
 	req.Body = ioutil.NopCloser(strings.NewReader(text))
@@ -220,20 +220,26 @@ func GetRequestBody(req *http.Request, v interface{}) (interface{}, *e.WError) {
 	}
 	if err != nil {
 		logging.Error("[GetRequestBody] Failed to unmarshal json body error, text = %s, error = %s", text, err.Error())
-		return nil, e.NewWError(e.ERR_CODE_IO, "Failed to unmarshal json body, error = %s", err.Error())
+		return nil, xerr.New(xerr.ERR_CODE_IO, "Failed to unmarshal json body, error = %s", err.Error())
 	}
 
 	return alter, nil
 }
 
-func GetResponseData(err *e.WError, data interface{}) []byte {
+func GetResponseData(err error, data interface{}) []byte {
 	resp := &HTTPResponse{}
 	if err == nil {
 		resp.Code = 0
 		resp.Msg = "ok"
 	} else {
-		resp.Code = err.Code()
-		resp.Msg = err.Error()
+		if v, ok := err.(*xerr.Xerr); ok {
+			resp.Code = v.Code()
+			resp.Msg = v.Error()
+		} else {
+			resp.Code = -1// UNKNOWN ERROR CODE
+			resp.Msg = err.Error()
+		}
+
 	}
 	resp.Data = data
 
@@ -246,7 +252,7 @@ func GetResponseData(err *e.WError, data interface{}) []byte {
 	return r
 }
 
-func LogGetResponseData(req *http.Request, err *e.WError, data interface{}) []byte {
+func LogGetResponseData(req *http.Request, err error, data interface{}) []byte {
 	ret := GetResponseData(err, data)
 
 	body := ""
@@ -268,7 +274,7 @@ func LogGetResponseData(req *http.Request, err *e.WError, data interface{}) []by
 	return ret
 }
 
-func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data interface{}) []byte {
+func LogGetResponseDataEx(req *http.Request, sTime int64, err error, data interface{}) []byte {
 	ret := GetResponseData(err, data)
 
 	body := ""
@@ -292,7 +298,7 @@ func LogGetResponseDataEx(req *http.Request, sTime int64, err *e.WError, data in
 	return ret
 }
 
-func ResponseWithLog(w http.ResponseWriter, req *http.Request, sTime int64, err *e.WError, data interface{}) {
+func ResponseWithLog(w http.ResponseWriter, req *http.Request, sTime int64, err error, data interface{}) {
 	ret := GetResponseData(err, data)
 	w.Write(ret)
 	body := ""

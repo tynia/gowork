@@ -8,16 +8,16 @@ import (
  * type: xerr(x error)
  * function : to return more detail message
  */
-type xerr struct {
+type Xerr struct {
 	eCode   int
 	eMsg    string
 }
 
-func (err *xerr) Code() int {
+func (err *Xerr) Code() int {
 	return err.eCode
 }
 
-func (err *xerr) Error() string {
+func (err *Xerr) Error() string {
 	if err.eCode == ERR_CODE_OK {
 		return "ok"
 	} else {
@@ -32,7 +32,7 @@ func New(code int, format string, args ...interface{}) error {
 		detail = fmt.Sprintf(format, args...)
 	}
 
-	err := &xerr{
+	err := &Xerr{
 		eCode: code,
 		eMsg: detail,
 	}

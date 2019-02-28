@@ -2,15 +2,16 @@ package service
 
 import (
 	"fmt"
+	"gowork/xerr"
+	"gowork/extern/logging"
+	"gowork/net"
 	"os"
 	"os/signal"
 	"runtime"
 	"strconv"
 	"syscall"
 	"time"
-	"gowork/extern/logging"
-	"gowork/net"
-	e "gowork/error"
+	"k8s.io/kubernetes/third_party/golang/go/doc/testdata"
 )
 
 var (
@@ -22,22 +23,22 @@ var (
 	dumpFlag   = os.O_CREATE | os.O_WRONLY
 )
 
-func reviewDumpPanic(file *os.File) *e.WError {
+func reviewDumpPanic(file *os.File) error {
 	fileinfo, err := file.Stat()
 	if err != nil {
-		return e.WrapError(e.ERR_CODE_SYS, err)
+		return xerr.New(xerr.ERR_CODE_SYS, err.Error())
 	}
 	if fileinfo.Size() == 0 {
 		file.Close()
 		err := os.Remove(file.Name())
 		if err != nil {
-			return e.WrapError(e.ERR_CODE_IO, err)
+			return xerr.New(xerr.ERR_CODE_IO, err.Error())
 		}
 	}
 	return nil
 }
 
-type InitHandlerFunc func() *e.WError
+type InitHandlerFunc func() error
 type Handler net.Handler
 
 var (
@@ -89,21 +90,21 @@ func (app *Application) signal() {
 	logging.Info("[Application.signal] register signal ok")
 }
 
-func (app *Application) dump() (*os.File, *e.WError) {
+func (app *Application) dump() (*os.File, error) {
 	suffix := fmt.Sprintf("-dump-%s", app.appName)
 	filename := dumpPrefix + suffix + "." + strconv.Itoa(os.Getpid())
 	file, err := os.OpenFile(filename, dumpFlag, dumpMode)
 	if err != nil {
-		return file, e.WrapError(e.ERR_CODE_SYS, err)
+		return file, xerr.New(xerr.ERR_CODE_SYS, err.Error())
 	}
 
 	if err := syscall.Dup2(int(file.Fd()), int(os.Stderr.Fd())); err != nil {
-		return file, e.WrapError(e.ERR_CODE_SYS, err)
+		return file, xerr.New(xerr.ERR_CODE_SYS, err.Error())
 	}
 	return file, nil
 }
 
-func (app *Application) initBaseModule() *e.WError {
+func (app *Application) initBaseModule() error {
 
 	err := initLogger(app.appName,
 		app.baseConfig.Log.Level,
@@ -126,11 +127,11 @@ func (app *Application) register() {
 	}
 }
 
-func (app *Application) run() *e.WError {
+func (app *Application) run() error {
 	// service
 	if app.baseConfig.Server.PortInfo == "" {
 		logging.Warning("[application.run] not valid serve port, try to run with no serve")
-		return nil //e.NewWError(e.ERR_CODE_PARA, "Invalid Serve port for application, port: %#+v", app.baseConfig.Server.PortInfo)
+		return nil //xerr.New(xerr.ERR_CODE_PARA, "Invalid Serve port for application, port: %#+v", app.baseConfig.Server.PortInfo)
 	} else {
 		net.Serve(app.baseConfig.Server.PortInfo, app.handler)
 	}
@@ -183,7 +184,7 @@ func (app *Application) AddHandlerFunc(addr string, handler net.HandlerFunc) {
 	logging.Info("[Application.AddHandlerFunc] Add/Replace [addr: %s] ok", addr)
 }
 
-func (app *Application) Go() *e.WError {
+func (app *Application) Go() error {
 	logging.Info("[Application] start")
 	// register signal
 	app.signal()
