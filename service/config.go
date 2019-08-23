@@ -3,7 +3,7 @@ package service
 import (
 	"bytes"
 	"encoding/json"
-	"gowork/xerr"
+	"github.com/tynia/gowork/xerr"
 	"io"
 	"io/ioutil"
 	"os"

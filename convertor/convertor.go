@@ -1,7 +1,7 @@
 package convertor
 
 import (
-	"gowork/xerr"
+	"github.com/tynia/gowork/xerr"
 	"strconv"
 	"strings"
 )

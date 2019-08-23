@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gowork/service"
-	"gowork/convertor"
+	"github.com/tynia/gowork/service"
+	"github.com/tynia/gowork/convertor"
 	"io"
 	"net/http"
 )
