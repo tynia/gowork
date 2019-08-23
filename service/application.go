@@ -2,9 +2,9 @@ package service
 
 import (
 	"fmt"
-	"gowork/xerr"
-	"gowork/extern/logging"
-	"gowork/net"
+	"github.com/tynia/gowork/xerr"
+	"github.com/tynia/gowork/extern/logging"
+	"github.com/tynia/gowork/net"
 	"os"
 	"os/signal"
 	"runtime"
