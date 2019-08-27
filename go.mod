@@ -1,4 +1,4 @@
-module gowork
+module github.com/tynia/gowork
 
 go 1.12
 
