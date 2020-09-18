@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/tynia/gowork/service"
-	"github.com/tynia/gowork/convertor"
+	"github.com/tynia/gowork/cvt"
 	"io"
 	"net/http"
 )
@@ -28,7 +28,7 @@ func main() {
 	// set another key/value into the instance of application
 	app.Set("another", "100")
 	v = app.Get("another")
-	vInt, _ := convertor.ToInt(v)
+	vInt, _ := cvt.ToInt(v)
 	fmt.Println(vInt) // the console will print the
 
 	// add handler to serve as http server

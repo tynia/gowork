@@ -49,7 +49,7 @@ func (f *fileNameInfoSlice) removeBefore(n int) {
 
 func (f *fileNameInfoSlice) renameIndex(prefix string) {
 	for index, fi := range f.files {
-		newname := prefix + "." + strconv.Itoa(index+1)
+		newname := prefix + "." + strconv.Itoa(index + 1)
 		_ = os.Rename(fi.fileName, newname)
 	}
 }

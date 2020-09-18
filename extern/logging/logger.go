@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type Record struct {
+type  Record struct {
 	Time       time.Time
 	Level      logLevel
 	Message    string

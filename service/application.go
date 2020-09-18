@@ -110,7 +110,7 @@ func (app *Application) initBaseModule() error {
 		app.baseConfig.Log.Suffix,
 		app.baseConfig.Prog.Daemon)
 	if err != nil {
-		logging.Error("[Application.initBaseModule] Initialize logger moduler failed, error = %s", err.Error())
+		logging.Error("[Application.initBaseModule] Initialize logger module failed, error = %s", err.Error())
 		return err
 	}
 

@@ -1,4 +1,4 @@
-package convertor
+package cvt
 
 import (
 	"github.com/tynia/gowork/xerr"
